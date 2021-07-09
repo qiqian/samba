@@ -725,7 +725,7 @@ _PUBLIC_ void cli_credentials_guess(struct cli_credentials *cred,
 	if (lp_ctx != NULL) {
 		cli_credentials_set_conf(cred, lp_ctx);
 	}
-	
+#if 0 // uwp, disable env
 	if (getenv("LOGNAME")) {
 		cli_credentials_set_username(cred, getenv("LOGNAME"), CRED_GUESS_ENV);
 	}
@@ -750,7 +750,7 @@ _PUBLIC_ void cli_credentials_guess(struct cli_credentials *cred,
 	if (p && p[0]) {
 		cli_credentials_parse_password_file(cred, p, CRED_GUESS_FILE);
 	}
-	
+#endif
 	if (cli_credentials_get_kerberos_state(cred) != CRED_DONT_USE_KERBEROS) {
 		cli_credentials_set_ccache(cred, lp_ctx, NULL, CRED_GUESS_FILE,
 					   &error_string);
@@ -958,7 +958,7 @@ _PUBLIC_ bool cli_credentials_parse_file(struct cli_credentials *cred, const cha
  * @param file a named file to read the password from 
  * @param obtained This enum describes how 'specified' this password is
  */
-
+#if 0
 _PUBLIC_ bool cli_credentials_parse_password_file(struct cli_credentials *credentials, const char *file, enum credentials_obtained obtained)
 {
 	int fd = open(file, O_RDONLY, 0);
@@ -976,7 +976,6 @@ _PUBLIC_ bool cli_credentials_parse_password_file(struct cli_credentials *creden
 	
 	return ret;
 }
-
 
 /**
  * Read a file descriptor, and parse it for a password (eg from a file or stdin)
@@ -1022,4 +1021,5 @@ _PUBLIC_ bool cli_credentials_parse_password_fd(struct cli_credentials *credenti
 	return true;
 }
 
+#endif
 

@@ -367,14 +367,14 @@ void dump_event_list(struct tevent_context *ev)
 }
 
 static const struct tevent_ops s3_event_ops = {
-	.context_init		= s3_event_context_init,
-	.add_fd			= tevent_common_add_fd,
-	.set_fd_close_fn	= tevent_common_fd_set_close_fn,
-	.get_fd_flags		= tevent_common_fd_get_flags,
-	.set_fd_flags		= tevent_common_fd_set_flags,
-	.add_timer		= tevent_common_add_timer,
-	.schedule_immediate	= tevent_common_schedule_immediate,
-	.add_signal		= tevent_common_add_signal,
+	.context_init = s3_event_context_init,
+	.add_fd = tevent_common_add_fd,
+	.set_fd_close_fn = tevent_common_fd_set_close_fn,
+	.get_fd_flags = tevent_common_fd_get_flags,
+	.set_fd_flags = tevent_common_fd_set_flags,
+	.add_timer = tevent_common_add_timer,
+	.schedule_immediate = tevent_common_schedule_immediate,
+	.add_signal = 0, // tevent_common_add_signal,
 	.loop_once		= s3_event_loop_once,
 	.loop_wait		= tevent_common_loop_wait,
 };

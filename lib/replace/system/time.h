@@ -79,6 +79,9 @@ int rep_utimes(const char *filename, const struct timeval tv[2]);
 typedef int clockid_t;
 int rep_clock_gettime(clockid_t clk_id, struct timespec *tp);
 #endif
+#ifndef HAVE_GETTIMEOFDAY_TZ
+int rep_gettimeofday(struct timeval* tv);
+#endif
 /* make sure we have a best effort CUSTOM_CLOCK_MONOTONIC we can rely on */
 #if defined(CLOCK_MONOTONIC)
 #define CUSTOM_CLOCK_MONOTONIC CLOCK_MONOTONIC

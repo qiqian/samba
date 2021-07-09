@@ -266,7 +266,7 @@ static const struct tevent_ops select_event_ops = {
 	.set_fd_flags		= tevent_common_fd_set_flags,
 	.add_timer		= tevent_common_add_timer_v2,
 	.schedule_immediate	= tevent_common_schedule_immediate,
-	.add_signal		= tevent_common_add_signal,
+	.add_signal		= 0,//tevent_common_add_signal,
 	.loop_once		= select_event_loop_once,
 	.loop_wait		= tevent_common_loop_wait,
 };

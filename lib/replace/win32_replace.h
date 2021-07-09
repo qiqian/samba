@@ -35,6 +35,14 @@ SHGetUID();
 #endif
 
 #include <dirent.h>
+#include <string.h>
+static int strcasecmp(char const* x,char const* y) {
+# if defined(_WIN32_WCE)
+	return _stricmp(x, y);
+# else
+	return strcmpi(x, y);
+# endif
+}
 
 /* Map BSD Socket errorcodes to the WSA errorcodes (if possible) */ 
 

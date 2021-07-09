@@ -121,8 +121,10 @@ static void tevent_backend_init(void)
 	done = true;
 
 	tevent_select_init();
+#if HAVE_POLL
 	tevent_poll_init();
 	tevent_poll_mt_init();
+#endif
 #ifdef HAVE_EPOLL
 	tevent_epoll_init();
 #endif
@@ -177,12 +179,14 @@ int tevent_common_context_destructor(struct tevent_context *ev)
 	struct tevent_immediate *ie, *in;
 	struct tevent_signal *se, *sn;
 
+#if 0
 	if (ev->pipe_fde) {
 		talloc_free(ev->pipe_fde);
 		close(ev->pipe_fds[0]);
 		close(ev->pipe_fds[1]);
 		ev->pipe_fde = NULL;
 	}
+#endif
 
 	for (fd = ev->fd_events; fd; fd = fn) {
 		fn = fd->next;
@@ -323,7 +327,8 @@ void tevent_fd_set_close_fn(struct tevent_fd *fde,
 	fde->event_ctx->ops->set_fd_close_fn(fde, close_fn);
 }
 
-static void tevent_fd_auto_close_fn(struct tevent_context *ev,
+#if 0
+static void tevent_fd_auto_close_fntevent_fd_auto_close_fn(struct tevent_context *ev,
 				    struct tevent_fd *fde,
 				    int fd,
 				    void *private_data)
@@ -335,6 +340,7 @@ void tevent_fd_set_auto_close(struct tevent_fd *fde)
 {
 	tevent_fd_set_close_fn(fde, tevent_fd_auto_close_fn);
 }
+#endif
 
 /*
   return the fd event flags

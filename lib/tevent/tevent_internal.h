@@ -245,8 +245,10 @@ struct tevent_context {
 	void *additional_data;
 
 	/* pipe hack used with signal handlers */
+#if 0 // no pipe uwp 
 	struct tevent_fd *pipe_fde;
 	int pipe_fds[2];
+#endif
 
 	/* debugging operations */
 	struct tevent_debug_ops debug_ops;

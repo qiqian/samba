@@ -62,7 +62,7 @@ struct timeval tevent_timeval_zero(void)
 struct timeval tevent_timeval_current(void)
 {
 	struct timeval tv;
-	gettimeofday(&tv, NULL);
+	gettimeofday(&tv);
 	return tv;
 }
 

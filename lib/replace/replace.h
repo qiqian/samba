@@ -579,6 +579,10 @@ int rep_strerror_r(int errnum, char *buf, size_t buflen);
 #define clock_gettime rep_clock_gettime
 #endif
 
+#if !defined(HAVE_GETTIMEOFDAY_TZ)
+#define gettimeofday rep_gettimeofday
+#endif
+
 #ifdef HAVE_LIMITS_H
 #include <limits.h>
 #endif

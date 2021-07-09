@@ -65,7 +65,7 @@ const char **ev_str_list_add(const char **list, const char *s)
   if SYSV use O_NDELAY
   if BSD use FNDELAY
 **/
-
+#if 0
 int ev_set_blocking(int fd, bool set)
 {
 	int val;
@@ -88,6 +88,7 @@ int ev_set_blocking(int fd, bool set)
 	return fcntl( fd, F_SETFL, val);
 #undef FLAG_TO_SET
 }
+#endif
 
 bool ev_set_close_on_exec(int fd)
 {
