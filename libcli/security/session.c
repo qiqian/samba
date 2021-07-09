@@ -27,7 +27,7 @@ enum security_user_level security_session_user_level(struct auth_session_info *s
 						     const struct dom_sid *domain_sid)
 {
 	if (!session_info) {
-		return SECURITY_ANONYMOUS;
+		return SECURITY_ANONYMOUS_SMB;
 	}
 
 	if (security_token_is_system(session_info->security_token)) {
@@ -35,7 +35,7 @@ enum security_user_level security_session_user_level(struct auth_session_info *s
 	}
 
 	if (security_token_is_anonymous(session_info->security_token)) {
-		return SECURITY_ANONYMOUS;
+		return SECURITY_ANONYMOUS_SMB;
 	}
 
 	if (security_token_has_builtin_administrators(session_info->security_token)) {
@@ -60,5 +60,5 @@ enum security_user_level security_session_user_level(struct auth_session_info *s
 		return SECURITY_USER;
 	}
 
-	return SECURITY_ANONYMOUS;
+	return SECURITY_ANONYMOUS_SMB;
 }

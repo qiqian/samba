@@ -1,20 +1,44 @@
 #ifndef _WIN32_REPLACE_H
 #define _WIN32_REPLACE_H
 
+#ifdef HAVE_WINDOWS_H
+
+#define NOCRYPT
+#include <windows.h>
+
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+
+#include <stdint.h>
+typedef uint32_t gid_t;
+typedef uint32_t uid_t;
+typedef uint32_t mode_t;
+typedef uint32_t nlink_t;
+typedef size_t blksize_t;
+typedef uint64_t blkcnt_t;
+typedef size_t offset_t;
+typedef	long	pid_t;
+
+#define getpid() GetCurrentProcessId()
+SHGetUID();
+#endif
+
 #ifdef HAVE_WINSOCK2_H
 #include <winsock2.h>
+#ifndef ESHUTDOWN
+#define ESHUTDOWN WSAESHUTDOWN
+#endif
 #endif
 
 #ifdef HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>
 #endif
 
-#ifdef HAVE_WINDOWS_H
-#include <windows.h>
-#endif
+#include <dirent.h>
 
 /* Map BSD Socket errorcodes to the WSA errorcodes (if possible) */ 
 
+#if 0
 #define EAFNOSUPPORT	WSAEAFNOSUPPORT
 #define ECONNREFUSED    WSAECONNREFUSED 
 #define EINPROGRESS	WSAEINPROGRESS
@@ -25,6 +49,7 @@
 #define ENOPROTOOPT	WSAENOPROTOOPT
 #define ENOTCONN	WSAENOTCONN 
 #define ENOTSUP		134 
+#endif
 
 /* We undefine the following constants due to conflicts with the w32api headers
  * and the Windows Platform SDK/DDK.

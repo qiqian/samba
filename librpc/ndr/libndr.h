@@ -26,7 +26,9 @@
 #define __LIBNDR_H__
 
 #include <talloc.h>
+#if HAVE_SYS_TIME_H
 #include <sys/time.h>
+#endif
 #include "../lib/util/samba_util.h" /* for discard_const */
 #include "../lib/util/charset/charset.h"
 

@@ -244,7 +244,7 @@ int num_privileges_in_short_list( void )
  add a privilege to a privilege array
  ****************************************************************************/
 
-static bool privilege_set_add(PRIVILEGE_SET *priv_set, struct lsa_LUIDAttribute set)
+static bool privilege_set_add(PRIVILEGE_SET_SMB *priv_set, struct lsa_LUIDAttribute set)
 {
 	struct lsa_LUIDAttribute *new_set;
 
@@ -269,7 +269,7 @@ static bool privilege_set_add(PRIVILEGE_SET *priv_set, struct lsa_LUIDAttribute 
 /*******************************************************************
 *******************************************************************/
 
-bool se_priv_to_privilege_set( PRIVILEGE_SET *set, uint64_t privilege_mask )
+bool se_priv_to_privilege_set( PRIVILEGE_SET_SMB *set, uint64_t privilege_mask )
 {
 	int i;
 	struct lsa_LUIDAttribute luid;

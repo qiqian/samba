@@ -30,7 +30,9 @@
 
 #include <stdint.h>
 #include <talloc.h>
+#if HAVE_SYS_TIME_H
 #include <sys/time.h>
+#endif
 #include <stdbool.h>
 
 struct tevent_context;

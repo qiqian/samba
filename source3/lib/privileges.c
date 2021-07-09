@@ -182,14 +182,14 @@ bool get_privileges_for_sids(uint64_t *privileges, struct dom_sid *slist, int sc
 	return found;
 }
 
-NTSTATUS get_privileges_for_sid_as_set(TALLOC_CTX *mem_ctx, PRIVILEGE_SET **privileges, struct dom_sid *sid)
+NTSTATUS get_privileges_for_sid_as_set(TALLOC_CTX *mem_ctx, PRIVILEGE_SET_SMB **privileges, struct dom_sid *sid)
 {
 	uint64_t mask;
 	if (!get_privileges(sid, &mask)) {
 		return NT_STATUS_OBJECT_NAME_NOT_FOUND;
 	}
 
-	*privileges = talloc_zero(mem_ctx, PRIVILEGE_SET);
+	*privileges = talloc_zero(mem_ctx, PRIVILEGE_SET_SMB);
 	if (!*privileges) {
 		return NT_STATUS_NO_MEMORY;
 	}

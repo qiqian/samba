@@ -37,5 +37,5 @@ void se_priv_put_all_privileges(uint64_t *privilege_mask);
  Convert PRIVILEGE_SET to a privilege bitmap and back again
 ****************************************************************************/
 
-bool se_priv_to_privilege_set( PRIVILEGE_SET *set, uint64_t privilege_mask );
+bool se_priv_to_privilege_set( PRIVILEGE_SET_SMB *set, uint64_t privilege_mask );
 bool privilege_set_to_se_priv( uint64_t *privilege_mask, struct lsa_PrivilegeSet *privset );

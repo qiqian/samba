@@ -23,8 +23,12 @@
 #ifndef _WBCLIENT_H
 #define _WBCLIENT_H
 
+#if HAVE_PWD_H
 #include <pwd.h>
+#endif
+#if HAVE_GRP_H
 #include <grp.h>
+#endif
 
 /* Define error types */
 

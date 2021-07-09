@@ -576,10 +576,11 @@ struct tevent_req *open_socket_out_send(TALLOC_CTX *mem_ctx,
 		psa->sin_port = htons(port);
 		state->salen = sizeof(struct sockaddr_in);
 	}
-
+#ifndef _MSC_VER
 	if (pss->ss_family == AF_UNIX) {
 		state->salen = sizeof(struct sockaddr_un);
 	}
+#endif
 
 	print_sockaddr(addr, sizeof(addr), &state->ss);
 	DEBUG(3,("Connecting to %s at port %u\n", addr,	(unsigned int)port));
@@ -857,7 +858,11 @@ int open_udp_socket(const char *host, int port)
 	}
 
 	if (connect(res, (struct sockaddr *)&ss, salen)) {
+#ifdef HAVE_WINSOCK2_H
+		closesocket(res);
+#else
 		close(res);
+#endif
 		return -1;
 	}
 

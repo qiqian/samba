@@ -47,6 +47,7 @@
 /* Type used for the number of file descriptors.  */
 typedef unsigned long int nfds_t;
 
+#if !defined(HAVE_WINSOCK2_H) || !HAVE_WINSOCK2_H
 /* Data structure describing a polling request.  */
 struct pollfd
 {
@@ -68,6 +69,7 @@ struct pollfd
 #define POLLERR		0x008		/* Error condition.  */
 #define POLLHUP		0x010		/* Hung up.  */
 #define POLLNVAL	0x020		/* Invalid polling request.  */
+#endif
 
 /* define is in "replace.h" */
 int rep_poll(struct pollfd *fds, nfds_t nfds, int timeout);

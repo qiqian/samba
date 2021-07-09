@@ -42,7 +42,7 @@ typedef struct {
 	uint32_t count;
 	uint32_t control;
 	struct lsa_LUIDAttribute *set;
-} PRIVILEGE_SET;
+} PRIVILEGE_SET_SMB;
 
 const char* get_privilege_dispname( const char *name );
 

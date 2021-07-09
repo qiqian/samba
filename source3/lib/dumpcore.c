@@ -41,6 +41,7 @@ static char *corepath;
 /**
  * Build up the default corepath as "<logbase>/cores/<progname>"
  */
+#if DUMP_CORE
 static char *get_default_corepath(const char *logbase, const char *progname)
 {
 	char *tmp_corepath;
@@ -78,7 +79,7 @@ static char *get_default_corepath(const char *logbase, const char *progname)
 	talloc_free(tmp_corepath);
 	return NULL;
 }
-
+#endif
 
 /**
  * Get the FreeBSD corepath.
@@ -189,6 +190,7 @@ static char *get_linux_corepath(void)
  *
  * If the system doesn't define a corepath, then the default is used.
  */
+#if DUMP_CORE
 static char *get_corepath(const char *logbase, const char *progname)
 {
 #if (defined(FREEBSD) && defined(HAVE_SYSCTLBYNAME))
@@ -214,6 +216,7 @@ static char *get_corepath(const char *logbase, const char *progname)
 	/* Fall back to the default. */
 	return get_default_corepath(logbase, progname);
 }
+#endif
 
 /*******************************************************************
 make all the preparations to safely dump a core file
@@ -221,6 +224,7 @@ make all the preparations to safely dump a core file
 
 void dump_core_setup(const char *progname, const char *log_file)
 {
+#if DUMP_CORE
 	char *logbase = NULL;
 	char *end = NULL;
 
@@ -270,6 +274,7 @@ void dump_core_setup(const char *progname, const char *log_file)
 	 */
  out:
 	SAFE_FREE(logbase);
+#endif
 }
 
  void dump_core(void)

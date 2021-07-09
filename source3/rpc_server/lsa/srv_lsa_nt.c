@@ -2889,7 +2889,7 @@ NTSTATUS _lsa_EnumPrivsAccount(struct pipes_struct *p,
 {
 	NTSTATUS status = NT_STATUS_OK;
 	struct lsa_info *info=NULL;
-	PRIVILEGE_SET *privileges;
+	PRIVILEGE_SET_SMB *privileges;
 	struct lsa_PrivilegeSet *priv_set = NULL;
 
 	/* find the connection policy handle. */
@@ -3330,7 +3330,7 @@ NTSTATUS _lsa_RemoveAccountRights(struct pipes_struct *p,
 
 static NTSTATUS init_lsa_right_set(TALLOC_CTX *mem_ctx,
 				   struct lsa_RightSet *r,
-				   PRIVILEGE_SET *privileges)
+				   PRIVILEGE_SET_SMB *privileges)
 {
 	uint32 i;
 	const char *privname;
@@ -3377,7 +3377,7 @@ NTSTATUS _lsa_EnumAccountRights(struct pipes_struct *p,
 {
 	NTSTATUS status;
 	struct lsa_info *info = NULL;
-	PRIVILEGE_SET *privileges;
+	PRIVILEGE_SET_SMB *privileges;
 
 	/* find the connection policy handle. */
 

@@ -122,7 +122,7 @@
 /* do you want to dump core (carefully!) when an internal error is
    encountered? Samba will be careful to make the core file only
    accessible to root */
-#define DUMP_CORE 1
+//#define DUMP_CORE 1
 
 /* shall we support browse requests via a FIFO to nmbd? */
 #define ENABLE_FIFO 1

@@ -28,6 +28,13 @@
 #include "system/select.h"
 #include "winbind_client.h"
 
+#if _MSC_VER
+#include <process.h>
+#define close(winbindd_fd) closesocket(winbindd_fd)
+#define write(s, buf, len) send(s, buf, len, 0)
+#define read(s, buf, len) recv(s, buf, len, 0)
+#endif
+
 /* Global variables.  These are effectively the client state information */
 
 int winbindd_fd = -1;           /* fd for winbindd socket */
@@ -81,6 +88,8 @@ static void winbind_close_sock(void)
 
 /* Make sure socket handle isn't stdin, stdout or stderr */
 #define RECURSION_LIMIT 3
+
+#ifdef HAVE_UNIXSOCKET
 
 static int make_nonstd_fd_internals(int fd, int limit /* Recursion limiter */)
 {
@@ -285,6 +294,8 @@ static int winbind_named_pipe_sock(const char *dir)
 	close(fd);
 	return -1;
 }
+
+#endif
 
 static const char *winbindd_socket_dir(void)
 {
